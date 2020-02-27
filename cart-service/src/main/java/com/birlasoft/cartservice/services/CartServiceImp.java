@@ -57,26 +57,26 @@ public class CartServiceImp implements ICartService {
 
     private void addProduct(Product product){
         Cart cart = cartDataService.findById(cartUserContext.getCartId()).get();
-        Map<Product, ProductCounter> productCountMap = cart.getProductCountMap();
+        Map<Long, ProductCounter> productCountMap = cart.getProductCountMap();
         if(productCountMap==null){
             productCountMap = new HashMap<>();
             ProductCounter productCounter = new ProductCounter();
             productCounter.setProduct(product);
             productCounter.setCountOfAProduct(1);
-            productCountMap.put(product, productCounter);
+            productCountMap.put(product.getId(), productCounter);
             cart.setProductCountMap(productCountMap);
             cartDataService.save(cart);
         }else {
-            if (productCountMap.get(product) == null) {
+            if (productCountMap.get(product.getId()) == null) {
                 ProductCounter counter = new ProductCounter();
                 counter.setProduct(product);
                 counter.setCountOfAProduct(1);
-                productCountMap.put(product, counter);
+                productCountMap.put(product.getId(), counter);
             } else {
-                ProductCounter productCount = productCountMap.get(product);
+                ProductCounter productCount = productCountMap.get(product.getId());
                 int count = productCount.getCountOfAProduct() + 1;
                 productCount.setCountOfAProduct(count);
-                productCountMap.put(product, productCount);
+                productCountMap.put(product.getId(), productCount);
             }
         }
     }

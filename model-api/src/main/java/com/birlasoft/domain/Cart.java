@@ -19,7 +19,7 @@ public class Cart {
             joinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "id")}
             , inverseJoinColumns = {@JoinColumn(name = "counter_id", referencedColumnName = "id")})
     @MapKeyJoinColumn(name = "product_Id")
-    private Map<Product, ProductCounter> productCountMap;
+    private Map<Long, ProductCounter> productCountMap;
     private Long userId;
 
   /*  public void addProduct(Product product) {
