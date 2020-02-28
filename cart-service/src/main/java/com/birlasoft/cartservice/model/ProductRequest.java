@@ -14,7 +14,7 @@ public class ProductRequest {
     private Long productId;
     private UpdateType TYPE;
 
-    public enum UpdateType{
+    public enum UpdateType {
         REMOVAL,
         ADDITION,
     }

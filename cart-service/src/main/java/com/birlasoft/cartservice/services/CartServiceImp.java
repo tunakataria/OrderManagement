@@ -1,12 +1,13 @@
 package com.birlasoft.cartservice.services;
 
+import com.birlasoft.cartservice.command.Cart2CartDto;
 import com.birlasoft.cartservice.extservices.IProductServiceClient;
 import com.birlasoft.cartservice.model.CartResponse;
 import com.birlasoft.cartservice.model.ProductRequest;
 import com.birlasoft.cartservice.services.springdataservice.CartDataService;
 import com.birlasoft.domain.Cart;
 import com.birlasoft.domain.Product;
-import com.birlasoft.domain.ProductCounter;
+import com.birlasoft.domain.ProductDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,17 +23,20 @@ public class CartServiceImp implements ICartService {
     @Autowired
     private IProductServiceClient iProductServiceClient;
 
+    @Autowired
+    private Cart2CartDto cart2CartDto;
+
     @Override
     public CartResponse processInternal(ProductRequest request) {
         Long userID = cartUserContext.getUserId();
         Cart cart = checkUserHasACart(userID);
         updateContext(cart.getId());
-        if(request.getTYPE()== ProductRequest.UpdateType.ADDITION){
-           cart = addProduct(request.getProductId());
-        }else{
-           cart = removeProduct(request.getProductId());
+        if (request.getTYPE() == ProductRequest.UpdateType.ADDITION) {
+            cart = addProduct(request.getProductId());
+        } else {
+            cart = removeProduct(request.getProductId());
         }
-        return CartResponse.builder().cart(cart).build();
+        return CartResponse.builder().cart(cart2CartDto.cart2CartDto(cart)).build();
     }
 
     private Cart checkUserHasACart(Long userID) {
@@ -50,34 +54,49 @@ public class CartServiceImp implements ICartService {
 
     public Cart removeProduct(Long productId) {
         Cart cart = cartDataService.findById(cartUserContext.getCartId()).get();
-        Product product = iProductServiceClient.product(productId);
+        ProductDetails productDetails = cart.getProductCountMap().get(productId);
+        if (productDetails.getCountOfAProduct() == 1) {
+            cart.getProductCountMap().remove(productId);
+            cartDataService.save(cart);
+        } else {
+            int initialCount = productDetails.getCountOfAProduct();
+            productDetails.setCountOfAProduct(initialCount - 1);
+        }
         cartDataService.save(cart);
         return cart;
     }
 
-    private void addProduct(Product product){
+    private void addProduct(Product product) {
         Cart cart = cartDataService.findById(cartUserContext.getCartId()).get();
-        Map<Long, ProductCounter> productCountMap = cart.getProductCountMap();
-        if(productCountMap==null){
-            productCountMap = new HashMap<>();
-            ProductCounter productCounter = new ProductCounter();
-            productCounter.setProduct(product);
-            productCounter.setCountOfAProduct(1);
-            productCountMap.put(product.getId(), productCounter);
-            cart.setProductCountMap(productCountMap);
+        Map<Long, ProductDetails> mapProductDetails = cart.getProductCountMap();
+        ProductDetails productDetails;
+        if (mapProductDetails == null) {
+            productDetails = product2ProductDetails(product);
+            mapProductDetails = new HashMap<>();
+            productDetails.setCountOfAProduct(1);
+            mapProductDetails.put(product.getId(), productDetails);
+            cart.setProductCountMap(mapProductDetails);
             cartDataService.save(cart);
-        }else {
-            if (productCountMap.get(product.getId()) == null) {
-                ProductCounter counter = new ProductCounter();
-                counter.setProduct(product);
-                counter.setCountOfAProduct(1);
-                productCountMap.put(product.getId(), counter);
+        } else {
+            if (mapProductDetails.get(product.getId()) == null) {
+                productDetails = product2ProductDetails(product);
+                productDetails.setCountOfAProduct(1);
+                mapProductDetails.put(product.getId(), productDetails);
             } else {
-                ProductCounter productCount = productCountMap.get(product.getId());
-                int count = productCount.getCountOfAProduct() + 1;
-                productCount.setCountOfAProduct(count);
-                productCountMap.put(product.getId(), productCount);
+                productDetails = mapProductDetails.get(product.getId());
+                int count = productDetails.getCountOfAProduct() + 1;
+                productDetails.setCountOfAProduct(count);
+                mapProductDetails.put(product.getId(), productDetails);
             }
         }
+    }
+
+    private ProductDetails product2ProductDetails(Product product) {
+        ProductDetails productDetails = new ProductDetails();
+        productDetails.setProductRef(product.getId());
+        productDetails.setCategory(product.getCategory());
+        productDetails.setProductName(product.getProductName());
+        productDetails.setProductPrice(product.getProductPrice());
+        return productDetails;
     }
 }

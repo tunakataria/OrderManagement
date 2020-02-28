@@ -18,9 +18,9 @@ public interface ICartService {
         return processInternal(productRequest);
     }
 
-    default CartUserContext updateContext(Long cartId){
-         cartUserContext.setCartId(cartId);
-         return cartUserContext;
+    default CartUserContext updateContext(Long cartId) {
+        cartUserContext.setCartId(cartId);
+        return cartUserContext;
     }
 
     CartResponse processInternal(ProductRequest request);

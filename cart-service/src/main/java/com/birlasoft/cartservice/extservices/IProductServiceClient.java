@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(name="product-service", url="http://localhost:9080")
+@FeignClient(name = "product-service", url = "http://localhost:9080")
 @RequestMapping("/product-service/V1")
 public interface IProductServiceClient {
 

@@ -13,11 +13,13 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ProductCounter {
+public class ProductDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne(cascade=CascadeType.ALL)
-    private Product product;
+    private Long productRef;
+    private String productName;
+    private String productPrice;
+    private String category;
     private int countOfAProduct;
 }

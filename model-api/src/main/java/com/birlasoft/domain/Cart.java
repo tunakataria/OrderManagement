@@ -4,7 +4,6 @@ import lombok.Data;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -17,9 +16,9 @@ public class Cart {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "cart_order_mapping",
             joinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "id")}
-            , inverseJoinColumns = {@JoinColumn(name = "counter_id", referencedColumnName = "id")})
-    @MapKeyJoinColumn(name = "product_Id")
-    private Map<Long, ProductCounter> productCountMap;
+            , inverseJoinColumns = {@JoinColumn(name = "productDetails_id", referencedColumnName = "id")})
+    @MapKeyColumn(name = "product_Id")
+    private Map<Long, ProductDetails> productCountMap;
     private Long userId;
 
   /*  public void addProduct(Product product) {
