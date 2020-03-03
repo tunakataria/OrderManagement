@@ -10,6 +10,7 @@ public class ProductDetails2ProductDetailsDto {
         productDetailsDto.setProductName(productDetails.getProductName());
         productDetailsDto.setProductPrice(productDetails.getProductPrice());
         productDetailsDto.setProductRef(productDetails.getProductRef());
+        productDetailsDto.setCategory(productDetails.getCategory());
         productDetailsDto.setCountOfAProduct(productDetails.getCountOfAProduct());
         return productDetailsDto;
 

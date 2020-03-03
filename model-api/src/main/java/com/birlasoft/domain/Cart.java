@@ -14,9 +14,9 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "cart_order_mapping",
+    @JoinTable(name = "cart_product_mapping",
             joinColumns = {@JoinColumn(name = "cart_id", referencedColumnName = "id")}
-            , inverseJoinColumns = {@JoinColumn(name = "productDetails_id", referencedColumnName = "id")})
+            , inverseJoinColumns = {@JoinColumn(name = "product_details_id", referencedColumnName = "id")})
     @MapKeyColumn(name = "product_Id")
     private Map<Long, ProductDetails> productCountMap;
     private Long userId;

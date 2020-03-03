@@ -11,4 +11,6 @@ public interface CartDataService {
     Cart save(Cart cart);
 
     Cart findCartAssociatedToUser(Long userId);
+
+     void deleteAllProducts(Long cartId);
 }

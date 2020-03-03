@@ -24,16 +24,19 @@ public class ProductsDataLoader implements CommandLineRunner {
         Product productOne = new Product();
         productOne.setCategory("Cosmetic");
         productOne.setProductName("HeadAndShoulder");
+        productOne.setProductPrice("36");
 
         //Product two
         Product productTwo = new Product();
         productTwo.setCategory("Hygiene");
         productTwo.setProductName("Harpic");
+        productTwo.setProductPrice("99");
 
         //Product two
         Product productThree = new Product();
         productThree.setCategory("Grocery");
         productThree.setProductName("Oatmeal");
+        productThree.setProductPrice("45");
 
         productRepository.save(productOne);
         productRepository.save(productTwo);
