@@ -1,4 +1,4 @@
-package com.birlasfot.productservice.repository;
+package com.birlasoft.productservice.repository;
 
 import com.birlasoft.domain.Product;
 import org.springframework.data.repository.CrudRepository;

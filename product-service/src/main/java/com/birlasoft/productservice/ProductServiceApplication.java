@@ -1,6 +1,6 @@
-package com.birlasfot.productservice;
+package com.birlasoft.productservice;
 
-import com.birlasfot.productservice.bootstrap.ProductsDataLoader;
+import com.birlasoft.productservice.bootstrap.ProductsDataLoader;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;

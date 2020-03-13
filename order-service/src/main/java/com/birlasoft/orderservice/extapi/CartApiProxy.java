@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@FeignClient(name = "cart-service")
-@RibbonClient(name="cart-service")
-@RequestMapping("/cart-service/V1")
+@FeignClient(name = "zuul-proxy-gateway-server")
+@RibbonClient(name="zuul-proxy-gateway-server")
+@RequestMapping("/cart-service/cart-service/V1")
 public interface CartApiProxy {
 
     @GetMapping("/cart/{cartId}")

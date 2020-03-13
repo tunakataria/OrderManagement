@@ -1,6 +1,6 @@
-package com.birlasfot.productservice.bootstrap;
+package com.birlasoft.productservice.bootstrap;
 
-import com.birlasfot.productservice.repository.ProductRepository;
+import com.birlasoft.productservice.repository.ProductRepository;
 import com.birlasoft.domain.Product;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

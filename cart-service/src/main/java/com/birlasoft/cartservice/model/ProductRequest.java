@@ -18,4 +18,13 @@ public class ProductRequest {
         REMOVAL,
         ADDITION,
     }
+
+    @Override
+    public String toString() {
+        return "ProductRequest{" +
+                "userId=" + userId +
+                ", productId=" + productId +
+                ", TYPE=" + TYPE +
+                '}';
+    }
 }

@@ -1,4 +1,4 @@
-package com.birlasfot.productservice.api;
+package com.birlasoft.productservice.api;
 
 import com.birlasoft.domain.Product;
 import org.springframework.web.bind.annotation.GetMapping;

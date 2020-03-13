@@ -8,6 +8,7 @@ import com.birlasoft.cartservice.services.springdataservice.CartDataService;
 import com.birlasoft.domain.Cart;
 import com.birlasoft.domain.Product;
 import com.birlasoft.domain.ProductDetails;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class CartServiceImp implements ICartService {
+
 
     @Autowired
     private CartDataService cartDataService;

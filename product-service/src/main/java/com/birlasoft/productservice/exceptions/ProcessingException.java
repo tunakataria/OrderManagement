@@ -1,4 +1,4 @@
-package com.birlasfot.productservice.exceptions;
+package com.birlasoft.productservice.exceptions;
 
 import lombok.Data;
 
