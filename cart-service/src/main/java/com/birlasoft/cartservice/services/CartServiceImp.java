@@ -1,6 +1,7 @@
 package com.birlasoft.cartservice.services;
 
 import com.birlasoft.cartservice.command.Cart2CartDto;
+import com.birlasoft.cartservice.context.UserServiceReqContext;
 import com.birlasoft.cartservice.extservices.IProductServiceClient;
 import com.birlasoft.cartservice.model.CartResponse;
 import com.birlasoft.cartservice.model.ProductRequest;
@@ -29,11 +30,20 @@ public class CartServiceImp implements ICartService {
     @Autowired
     private Cart2CartDto cart2CartDto;
 
+    @Autowired
+    UserServiceReqContext userServiceReqContext;
+
+    @Override
+    public UserServiceReqContext initContext(ProductRequest productRequest) {
+         userServiceReqContext.setUserId(productRequest.getUserId());
+         return userServiceReqContext;
+    }
+
     @Override
     public CartResponse processInternal(ProductRequest request) {
-        Long userID = cartUserContext.getUserId();
+        Long userID = request.getUserId();
         Cart cart = checkUserHasACart(userID);
-        updateContext(cart.getId());
+        userServiceReqContext.setCartId(cart.getId());
         if (request.getTYPE() == ProductRequest.UpdateType.ADDITION) {
             cart = addProduct(request.getProductId());
         } else {
@@ -47,7 +57,7 @@ public class CartServiceImp implements ICartService {
     }
 
     public Cart addProduct(Long productId) {
-        Cart cart = cartDataService.findById(cartUserContext.getCartId()).get();
+        Cart cart = cartDataService.findById(userServiceReqContext.getCartId()).get();
         Product product = iProductServiceClient.product(productId);
         addProduct(product);
         cartDataService.save(cart);
@@ -56,7 +66,7 @@ public class CartServiceImp implements ICartService {
 
 
     public Cart removeProduct(Long productId) {
-        Cart cart = cartDataService.findById(cartUserContext.getCartId()).get();
+        Cart cart = cartDataService.findById(userServiceReqContext.getCartId()).get();
         ProductDetails productDetails = cart.getProductCountMap().get(productId);
         if (productDetails.getCountOfAProduct() == 1) {
             cart.getProductCountMap().remove(productId);
@@ -70,7 +80,7 @@ public class CartServiceImp implements ICartService {
     }
 
     private void addProduct(Product product) {
-        Cart cart = cartDataService.findById(cartUserContext.getCartId()).get();
+        Cart cart = cartDataService.findById(userServiceReqContext.getCartId()).get();
         Map<Long, ProductDetails> mapProductDetails = cart.getProductCountMap();
         ProductDetails productDetails;
         if (mapProductDetails == null) {

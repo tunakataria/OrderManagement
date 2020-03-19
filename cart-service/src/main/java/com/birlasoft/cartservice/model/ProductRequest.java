@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class ProductRequest {
+public class ProductRequest{
     private Long userId;
     private Long productId;
     private UpdateType TYPE;
