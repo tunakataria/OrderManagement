@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+## Maven Sources ###
+../product-service/target
+
