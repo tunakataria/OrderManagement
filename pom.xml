@@ -10,9 +10,7 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <packaging>
-        pom
-    </packaging>
+    <packaging>pom</packaging>
 
     <groupId>com.birlasoft</groupId>
     <artifactId>usecase-parent</artifactId>
@@ -26,6 +24,7 @@
         <module>user-service</module>
         <module>product-service</module>
         <module>order-service</module>
+        <module>auth-server</module>
     </modules>
 
 
