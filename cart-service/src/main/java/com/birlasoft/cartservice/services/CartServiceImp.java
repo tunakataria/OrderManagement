@@ -12,7 +12,10 @@ import com.birlasoft.domain.ProductDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.GetRequestAttributes;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +34,10 @@ public class CartServiceImp implements ICartService {
     private Cart2CartDto cart2CartDto;
 
     @Autowired
-    UserServiceReqContext userServiceReqContext;
+    private UserServiceReqContext userServiceReqContext;
+
+    @Resource
+    private HttpServletRequest httpServletRequest;
 
     @Override
     public UserServiceReqContext initContext(ProductRequest productRequest) {
@@ -58,7 +64,7 @@ public class CartServiceImp implements ICartService {
 
     public Cart addProduct(Long productId) {
         Cart cart = cartDataService.findById(userServiceReqContext.getCartId()).get();
-        Product product = iProductServiceClient.product(productId);
+        Product product = iProductServiceClient.product(productId, GetRequestAttributes.getAuthHeader(httpServletRequest));
         addProduct(product);
         cartDataService.save(cart);
         return cart;
@@ -112,4 +118,7 @@ public class CartServiceImp implements ICartService {
         productDetails.setProductPrice(product.getProductPrice());
         return productDetails;
     }
+
+
+
 }

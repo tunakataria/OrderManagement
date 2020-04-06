@@ -4,7 +4,7 @@ HELP.md
 !**/src/main/**
 !**/**/src/test/**
 
-/target/
+**/target/
 /mvnw
 /*.cmd
 /*.md
@@ -35,4 +35,11 @@ build/
 ### VS Code ###
 .vscode/
 
+*.class
 
+/model-api/target/
+
+#### zipkin jar and dependencies
+*.jar
+*.md5
+*.asc

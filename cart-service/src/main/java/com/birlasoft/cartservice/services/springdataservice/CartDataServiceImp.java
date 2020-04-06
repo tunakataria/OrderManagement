@@ -3,10 +3,13 @@ package com.birlasoft.cartservice.services.springdataservice;
 import com.birlasoft.cartservice.repository.CartRepository;
 import com.birlasoft.cartservice.repository.ProductDetailsRepository;
 import com.birlasoft.domain.Cart;
+import com.birlasoft.domain.ProductDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -42,7 +45,8 @@ public class CartDataServiceImp implements CartDataService {
     @Override
     public void deleteAllProducts(Long cartId) {
        Cart cart = cartRepository.findById(cartId).get();
-            cart.getProductCountMap().entrySet().forEach(entry-> cart.getProductCountMap().remove(entry.getKey()));
+       Map<Long, ProductDetails> emptyMap = Collections.emptyMap();
+       cart.setProductCountMap(emptyMap);
       cartRepository.save(cart);
     }
 }

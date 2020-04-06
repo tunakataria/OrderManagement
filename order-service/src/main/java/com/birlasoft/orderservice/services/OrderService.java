@@ -7,8 +7,11 @@ import com.birlasoft.orderservice.extapi.CartApiProxy;
 import com.birlasoft.orderservice.models.OrderResponse;
 import com.birlasoft.orderservice.repositories.OrderDataService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -22,6 +25,10 @@ public class OrderService {
     @Autowired
     private OrderDataService orderDataService;
 
+    @Resource
+    private HttpServletRequest currentRequest;
+
+
     public OrderResponse order(Long userId) {
         Cart cart = getCart(userId);
         deleteProduct(cart.getId());
@@ -30,11 +37,11 @@ public class OrderService {
     }
 
     private Cart getCart(Long userId) {
-        return cartApiProxy.cart(userId);
+        return cartApiProxy.cart(userId, currentRequest.getHeader(HttpHeaders.AUTHORIZATION));
     }
 
     private void deleteProduct(Long cartId) {
-        cartApiProxy.deleteProducts(cartId);
+        cartApiProxy.deleteProducts(cartId, currentRequest.getHeader(HttpHeaders.AUTHORIZATION));
     }
 
     private OrderData createOrder(Cart cart) {
