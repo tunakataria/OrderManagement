@@ -2,6 +2,7 @@ package com.birlasoft.cartservice.services;
 
 import com.birlasoft.cartservice.command.Cart2CartDto;
 import com.birlasoft.cartservice.context.UserServiceReqContext;
+import com.birlasoft.cartservice.extservices.IProductClientWrapper;
 import com.birlasoft.cartservice.extservices.IProductServiceClient;
 import com.birlasoft.cartservice.model.CartResponse;
 import com.birlasoft.cartservice.model.ProductRequest;
@@ -9,9 +10,11 @@ import com.birlasoft.cartservice.services.springdataservice.CartDataService;
 import com.birlasoft.domain.Cart;
 import com.birlasoft.domain.Product;
 import com.birlasoft.domain.ProductDetails;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import util.FallbackDataService;
 import util.GetRequestAttributes;
 
 import javax.annotation.Resource;
@@ -28,7 +31,7 @@ public class CartServiceImp implements ICartService {
     private CartDataService cartDataService;
 
     @Autowired
-    private IProductServiceClient iProductServiceClient;
+    private IProductClientWrapper iProductServiceClient;
 
     @Autowired
     private Cart2CartDto cart2CartDto;
@@ -41,8 +44,8 @@ public class CartServiceImp implements ICartService {
 
     @Override
     public UserServiceReqContext initContext(ProductRequest productRequest) {
-         userServiceReqContext.setUserId(productRequest.getUserId());
-         return userServiceReqContext;
+        userServiceReqContext.setUserId(productRequest.getUserId());
+        return userServiceReqContext;
     }
 
     @Override
@@ -64,10 +67,14 @@ public class CartServiceImp implements ICartService {
 
     public Cart addProduct(Long productId) {
         Cart cart = cartDataService.findById(userServiceReqContext.getCartId()).get();
-        Product product = iProductServiceClient.product(productId, GetRequestAttributes.getAuthHeader(httpServletRequest));
+        Product product = getProduct(productId);
         addProduct(product);
         cartDataService.save(cart);
         return cart;
+    }
+
+    public Product getProduct(Long productId) {
+        return iProductServiceClient.product(productId, GetRequestAttributes.getAuthHeader(httpServletRequest));
     }
 
 
@@ -118,7 +125,6 @@ public class CartServiceImp implements ICartService {
         productDetails.setProductPrice(product.getProductPrice());
         return productDetails;
     }
-
 
 
 }

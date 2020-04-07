@@ -14,8 +14,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @OneToOne
-    private Cart cart;
+   // @OneToOne
+    //private Cart cart;
     private String userName;
 
 
