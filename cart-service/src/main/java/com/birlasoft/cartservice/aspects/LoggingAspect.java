@@ -1,5 +1,6 @@
 package com.birlasoft.cartservice.aspects;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 
 @Aspect
 @Component
+@Slf4j
 public class LoggingAspect {
 
     public static final Logger LOG = LoggerFactory.getLogger(LoggingAspect.class);

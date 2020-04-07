@@ -14,7 +14,8 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
-        <project.version>1.0-SNAPSHOT</project.version>
+        <project.version>${project.version}</project.version>
+        <artifcat.name>${project.artifactId}</artifcat.name>
     </properties>
 
     <packaging>
@@ -121,6 +122,39 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.33.0</version>
+                <configuration>
+                    <skip>false</skip>
+                    <images>
+                        <image>
+                            <name>birlasoft/${project.artifactId}:${project.version}</name>
+                            <build>
+                               <contextDir>
+                                    ${project.basedir}/src/main/docker
+                                </contextDir>
+                                <assembly>
+                                    <descriptorRef>
+                                        artifact
+                                    </descriptorRef>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

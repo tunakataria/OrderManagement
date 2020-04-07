@@ -18,14 +18,53 @@
 
     <modules>
         <module>eureka-server</module>
+        <module>auth-server</module>
         <module>zuul-gateway</module>
         <module>cart-service</module>
         <module>model-api</module>
         <module>user-service</module>
         <module>product-service</module>
         <module>order-service</module>
-        <module>auth-server</module>
+
     </modules>
 
+    <build>
+        <plugins>
+            <plugin>
+
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.33.0</version>
+                <configuration>
+                    <skip>true</skip>
+                    <images>
+                        <image>
+                            <name>birlasoft/${project.artifactId}:${project.version}</name>
+                            <build>
+                                <contextDir>
+                                    ${project.basedir}/src/main/docker
+                                </contextDir>
+                                <assembly>
+                                    <descriptorRef>
+                                        artifact
+                                    </descriptorRef>
+                                </assembly>
+                            </build>
+                        </image>
+                    </images>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>start</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
 
 </project>
