@@ -1,0 +1,76 @@
+version: "3.3"
+
+services:
+
+
+       zuul-gateway:
+            image: birlasoft/zuul-gateway:1.0-SNAPSHOT
+            container_name: zuul-gateway
+            networks:
+              - local
+            ports:
+              - "9761:9761"
+            depends_on:
+              - eureka-server
+
+       eureka-server:
+            image: birlasoft/eureka-server:1.0-SNAPSHOT
+            container_name: eureka-server
+            networks:
+              - local
+            ports:
+              - "8761:8761"
+
+       cart-service:
+         image: birlasoft/cart-service:1.0-SNAPSHOT
+         container_name: cart-service
+         networks:
+           - local
+         ports:
+           - "9060:9060"
+         depends_on:
+           - eureka-server
+
+       order-service:
+         image: birlasoft/order-service:1.0-SNAPSHOT
+         container_name: order-service
+         networks:
+           - local
+         ports:
+           - "9061:9061"
+         depends_on:
+           - eureka-server
+
+       auth-service:
+         image: birlasoft/auth-server:1.0-SNAPSHOT
+         container_name: auth-service
+         networks:
+           - local
+         ports:
+           - "9991:9991"
+         depends_on:
+           - eureka-server
+
+       product-service:
+         image: birlasoft/product-service:1.0-SNAPSHOT
+         container_name: product-service
+         networks:
+           - local
+         ports:
+           - "9080:9080"
+         depends_on:
+           - eureka-server
+
+       zipkin-service:
+         image: openzipkin/zipkin
+         container_name: zipkin
+         networks:
+           - local
+         ports:
+           - "9411:9411"
+         depends_on:
+           - eureka-server
+
+
+networks:
+       local:

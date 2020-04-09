@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.birlasoft</groupId>
 	<artifactId>eureka-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0-SNAPSHOT</version>
 	<name>eureka-server</name>
 	<description>This service will have information of all the running services in an environment</description>
 
