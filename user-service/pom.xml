@@ -52,6 +52,12 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-sleuth-zipkin</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>1.5.7</version>
+        </dependency>
         <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
@@ -126,7 +132,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.33.0</version>
                 <configuration>
-                    <skip>false</skip>
+                    <skip>true</skip>
                     <images>
                         <image>
                             <name>birlasoft/${project.artifactId}:${project.version}</name>
