@@ -1,8 +1,8 @@
 package com.birlasoft.orderservice.services;
 
-import com.birlasoft.domain.Cart;
-import com.birlasoft.domain.OrderData;
-import com.birlasoft.domain.ProductDetails;
+import com.birlasoft.domain.cart.Cart;
+import com.birlasoft.domain.order.OrderData;
+import com.birlasoft.domain.common.ProductDetails;
 import com.birlasoft.orderservice.extapi.CartApiProxy;
 import com.birlasoft.orderservice.models.OrderResponse;
 import com.birlasoft.orderservice.repositories.OrderDataService;

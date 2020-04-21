@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-@EntityScan("com.birlasoft.domain*")
+@EntityScan("com.birlasoft.domain.product")
 public class ProductServiceApplication {
 
     public static void main(String[] args) {

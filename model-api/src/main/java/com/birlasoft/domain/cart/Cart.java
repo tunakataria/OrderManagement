@@ -1,5 +1,6 @@
-package com.birlasoft.domain;
+package com.birlasoft.domain.cart;
 
+import com.birlasoft.domain.common.ProductDetails;
 import lombok.Data;
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
 package com.birlasoft.userservice.services;
 
-import com.birlasoft.domain.User;
+import com.birlasoft.domain.user.User;
 import com.birlasoft.userservice.models.BaseResponse;
 import com.birlasoft.userservice.models.ErrorResponse;
 import com.birlasoft.userservice.models.LoginRequest;

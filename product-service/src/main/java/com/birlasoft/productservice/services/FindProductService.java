@@ -2,7 +2,7 @@ package com.birlasoft.productservice.services;
 
 import com.birlasoft.productservice.exceptions.ProcessingException;
 import com.birlasoft.productservice.repository.ProductRepository;
-import com.birlasoft.domain.Product;
+import com.birlasoft.domain.product.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
 package com.birlasoft.cartservice.command;
 
-import com.birlasoft.domain.Cart;
+import com.birlasoft.domain.cart.Cart;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;

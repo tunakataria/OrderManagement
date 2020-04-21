@@ -1,6 +1,6 @@
 package com.birlasoft.productservice.repository;
 
-import com.birlasoft.domain.Product;
+import com.birlasoft.domain.product.Product;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

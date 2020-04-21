@@ -1,11 +1,11 @@
-package com.birlasoft.domain;
+package com.birlasoft.domain.order;
 
+import com.birlasoft.domain.common.ProductDetails;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -131,7 +131,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.33.0</version>
                 <configuration>
-                    <skip>false</skip>
+                    <skip>true</skip>
                     <images>
                         <image>
                             <name>birlasoft/${project.artifactId}:${project.version}</name>

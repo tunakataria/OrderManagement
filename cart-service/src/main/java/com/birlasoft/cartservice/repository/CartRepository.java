@@ -1,6 +1,6 @@
 package com.birlasoft.cartservice.repository;
 
-import com.birlasoft.domain.Cart;
+import com.birlasoft.domain.cart.Cart;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
