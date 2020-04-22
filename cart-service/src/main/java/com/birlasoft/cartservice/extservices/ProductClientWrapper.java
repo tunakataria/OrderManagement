@@ -1,6 +1,6 @@
 package com.birlasoft.cartservice.extservices;
 
-import com.birlasoft.domain.Product;
+import com.birlasoft.domain.product.Product;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;

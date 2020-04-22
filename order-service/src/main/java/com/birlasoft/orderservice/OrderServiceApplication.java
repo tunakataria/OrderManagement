@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EntityScan("com.birlasoft.domain*")
+@EntityScan({"com.birlasoft.domain.order","com.birlasoft.domain.common"})
 @EnableFeignClients
 @EnableDiscoveryClient
 public class OrderServiceApplication {

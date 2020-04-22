@@ -1,6 +1,6 @@
 package com.birlasoft.cartservice.command;
 
-import com.birlasoft.domain.ProductDetails;
+import com.birlasoft.domain.common.ProductDetails;
 import org.springframework.stereotype.Service;
 
 @Service

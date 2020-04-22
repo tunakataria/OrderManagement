@@ -1,6 +1,6 @@
 package util;
 
-import com.birlasoft.domain.Product;
+import com.birlasoft.domain.product.Product;
 
 import java.util.HashMap;
 import java.util.Map;

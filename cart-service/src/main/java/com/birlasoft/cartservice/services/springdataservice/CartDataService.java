@@ -1,6 +1,6 @@
 package com.birlasoft.cartservice.services.springdataservice;
 
-import com.birlasoft.domain.Cart;
+import com.birlasoft.domain.cart.Cart;
 
 import java.util.Optional;
 

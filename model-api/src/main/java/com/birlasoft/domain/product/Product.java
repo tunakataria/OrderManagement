@@ -1,4 +1,4 @@
-package com.birlasoft.domain;
+package com.birlasoft.domain.product;
 
 import lombok.Data;
 import lombok.Getter;

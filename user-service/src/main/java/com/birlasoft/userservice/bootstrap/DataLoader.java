@@ -1,6 +1,6 @@
 package com.birlasoft.userservice.bootstrap;
 
-import com.birlasoft.domain.User;
+import com.birlasoft.domain.user.User;
 import com.birlasoft.userservice.repositories.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

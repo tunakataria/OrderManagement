@@ -9,7 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 
 @SpringBootApplication
-@EntityScan("com.birlasoft.domain*")
+@EntityScan({"com.birlasoft.domain.cart","com.birlasoft.domain.common"})
 @EnableEurekaClient
 @EnableFeignClients
 @EnableCircuitBreaker

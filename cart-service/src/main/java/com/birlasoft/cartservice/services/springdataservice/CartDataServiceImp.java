@@ -2,8 +2,8 @@ package com.birlasoft.cartservice.services.springdataservice;
 
 import com.birlasoft.cartservice.repository.CartRepository;
 import com.birlasoft.cartservice.repository.ProductDetailsRepository;
-import com.birlasoft.domain.Cart;
-import com.birlasoft.domain.ProductDetails;
+import com.birlasoft.domain.cart.Cart;
+import com.birlasoft.domain.common.ProductDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

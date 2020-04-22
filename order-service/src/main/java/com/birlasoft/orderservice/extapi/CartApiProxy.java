@@ -1,6 +1,6 @@
 package com.birlasoft.orderservice.extapi;
 
-import com.birlasoft.domain.Cart;
+import com.birlasoft.domain.cart.Cart;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpHeaders;

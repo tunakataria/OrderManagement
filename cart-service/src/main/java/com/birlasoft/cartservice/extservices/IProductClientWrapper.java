@@ -1,6 +1,6 @@
 package com.birlasoft.cartservice.extservices;
 
-import com.birlasoft.domain.Product;
+import com.birlasoft.domain.product.Product;
 
 public interface IProductClientWrapper {
 
