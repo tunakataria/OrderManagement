@@ -2,7 +2,6 @@ version: "3.3"
 
 services:
 
-
        zuul-gateway:
             image: birlasoft/zuul-gateway:1.0-SNAPSHOT
             container_name: zuul-gateway
@@ -10,6 +9,8 @@ services:
               - local
             ports:
               - "9761:9761"
+            volumes:
+              - "./config/zuulserver:/usr/local/bin/config"
             depends_on:
               - eureka-server
 
@@ -18,8 +19,14 @@ services:
             container_name: eureka-server
             networks:
               - local
+            environment:
+              - SERVER_PORT:8761
+              - SPRING_APPLICATION_NAME:eureka
+              - SOME_VARIABLE:someValue
             ports:
               - "8761:8761"
+            volumes:
+              - "./config/eurekaserver:/usr/local/bin/config"
 
        cart-service:
          image: birlasoft/cart-service:1.0-SNAPSHOT
@@ -28,6 +35,8 @@ services:
            - local
          ports:
            - "9060:9060"
+         volumes:
+           - "./config/cartservice:/usr/local/bin/config"
          depends_on:
            - eureka-server
 
@@ -38,6 +47,8 @@ services:
            - local
          ports:
            - "9061:9061"
+         volumes:
+           - "./config/orderservice:/usr/local/bin/config"
          depends_on:
            - eureka-server
 
@@ -48,6 +59,8 @@ services:
            - local
          ports:
            - "9991:9991"
+         volumes:
+           - "./config/authserver:/usr/local/bin/config"
          depends_on:
            - eureka-server
 
@@ -58,6 +71,8 @@ services:
            - local
          ports:
            - "9080:9080"
+         volumes:
+           - "./config/productservice:/usr/local/bin/config"
          depends_on:
            - eureka-server
 
