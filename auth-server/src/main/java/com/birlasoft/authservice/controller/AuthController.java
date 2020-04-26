@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 
 @RestController
 public class AuthController implements IAuthService {
@@ -19,7 +21,7 @@ public class AuthController implements IAuthService {
     private IRequestHandler iRequestHandler;
 
     @Override
-    public ResponseEntity<? extends BaseAuthResponse> generate(GenerateTokenRequest generateTokenRequest) {
+    public ResponseEntity<? extends BaseAuthResponse> generate(@Valid GenerateTokenRequest generateTokenRequest) {
           return iRequestHandler.process(generateTokenRequest);
     }
 

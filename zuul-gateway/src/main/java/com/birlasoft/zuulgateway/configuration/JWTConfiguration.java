@@ -23,6 +23,9 @@ public class JWTConfiguration {
     @Value("${jwt.generator.uri:/**/generate/**}")
     private String tokenGeneratorURI;
 
+    @Value("${jwt.token.issuer:authserver}")
+    private String issuer;
+
 
 
 
