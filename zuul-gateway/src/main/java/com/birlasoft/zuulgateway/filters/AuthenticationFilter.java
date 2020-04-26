@@ -6,11 +6,9 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
 import com.birlasoft.zuulgateway.configuration.JWTConfiguration;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -22,7 +20,7 @@ import java.util.Arrays;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static com.birlasoft.zuulgateway.filters.AuthenticationFilter.Accesses.CAN_ADD_PRODUCT;
+import static com.birlasoft.zuulgateway.filters.AuthenticationFilter.Accesses.CAN_ADD;
 
 
 
@@ -48,7 +46,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
 
             DecodedJWT decodedJWT = decode(token.trim());
 
-            if (Boolean.parseBoolean(decodedJWT.getClaims().get(CAN_ADD_PRODUCT.getValue()).asString())) {
+            if (Boolean.parseBoolean(decodedJWT.getClaims().get(CAN_ADD.name()).asString())) {
                 UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                         null, null, Arrays.asList(new SimpleGrantedAuthority("ADMIN"))
                 );
@@ -69,20 +67,20 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     public DecodedJWT decode(String jwt) {
         Algorithm signingAlgo = Algorithm.HMAC256(jwtConfiguration.getSecretKey());
         JWTVerifier verifier = JWT.require(signingAlgo)
-                .withIssuer("auth0")
+                .withIssuer(jwtConfiguration.getIssuer())
                 .build(); //Reusable verifier instance
         return verifier.verify(jwt);
     }
 
     @Getter
     enum Accesses {
-        CAN_ADD_PRODUCT("canAddProduct");
-
-        Accesses(String value) {
-            this.value = value;
+        CAN_ADD(true),
+        CAN_DELETE(true),
+        CAN_ORDER(true);
+        private boolean granted;
+        Accesses(boolean b) {
+            this.granted = b;
         }
-
-        private String value;
 
 
     }
